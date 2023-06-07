@@ -2,22 +2,36 @@
 
 class UsersController < ApplicationController
     def index 
-        render plain: "I'm in the index action!"
+        users = User.all 
+        render json: users
     end 
 
     def create
-        render json: params
+        user = User.new(params.require(:user).permit(:name, :email))
+        if user.save
+            render json: user
+        else
+            render json: user.errors.full_messages, status: 422
+        end
     end 
 
     def show 
-        render json: params
+        user = User.find(params[:id])
+        render json: user
     end 
 
     def delete 
-        render json: params
+        user = User.find(params[:id])
+        user.destroy
+        redirect_to users_url
     end 
 
     def update
-        render json: params
+        user = User.find(params[:id])
+        if user.update(require(:user).permit(:name, :email))
+            redirect_to user_url(user)
+        else 
+            render json: user.errors.full_messages, status: 422
+        end
     end 
 end
