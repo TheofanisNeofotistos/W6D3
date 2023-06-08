@@ -29,4 +29,9 @@ class Artwork < ApplicationRecord
     through: :artwork_shares,
     source: :viewer
     
+    #acts as an active record query 
+    def self.artworks_for_user_id(id)
+        Artwork.where( artist_id: id )
+    end 
+    
 end 

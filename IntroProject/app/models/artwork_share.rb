@@ -18,4 +18,6 @@ class ArtworkShare < ApplicationRecord
     primary_key: :id,
     foreign_key: :viewer_id,
     class_name: :User
+
+    validates :artwork_id, uniqueness: { scope: :viewer_id }
 end
