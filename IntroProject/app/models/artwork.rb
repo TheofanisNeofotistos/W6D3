@@ -23,11 +23,19 @@ class Artwork < ApplicationRecord
     primary_key: :id,
     foreign_key: :artwork_id,
     class_name: :ArtworkShare,
-    dependent: :destroy
+    dependent: :destroy,
+    inverse_of: :artwork
 
     has_many :shared_viewers,
     through: :artwork_shares,
     source: :viewer
+
+    has_many :comments,
+    primary_key: :id,
+    foreign_key: :artwork_id,
+    class_name: :Comment,
+    dependent: :destroy,
+    inverse_of: :artwork
     
     #acts as an active record query 
     def self.artworks_for_user_id(id)
