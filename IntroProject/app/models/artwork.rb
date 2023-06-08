@@ -31,7 +31,7 @@ class Artwork < ApplicationRecord
     
     #acts as an active record query 
     def self.artworks_for_user_id(id)
-        Artwork.where( artist_id: id )
+        Artwork.left_joins(:shared_viewers).where("artworks.artist_id = #{id} OR artwork_shares.viewer_id = #{id}")
     end 
     
 end 

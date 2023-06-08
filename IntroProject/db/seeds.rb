@@ -10,4 +10,8 @@
 u1 = User.create!(username: 'TheoNeo')
 a1 = Artwork.create!(artist_id: u1.id,title: "Dunkin",image_url: "SDFSDFSDFASD")
 
+u2 = User.create!(username: 'michellemybelle')
+a2 = Artwork.create!(artist_id: u2.id,title: "Starry Night",image_url: "sdjfk")
+
 ArtworkShare.create!(viewer_id: u1.id, artwork_id: a1.id)
+ArtworkShare.create!(viewer_id: u2.id, artwork_id: a1.id)
